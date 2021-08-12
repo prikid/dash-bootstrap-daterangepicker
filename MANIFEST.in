@@ -1,0 +1,11 @@
+include dash_bootstrap_daterangepicker/dash_bootstrap_daterangepicker.min.js
+include dash_bootstrap_daterangepicker/dash_bootstrap_daterangepicker.min.js.map
+include dash_bootstrap_daterangepicker/async-*.js
+include dash_bootstrap_daterangepicker/async-*.js.map
+include dash_bootstrap_daterangepicker/*-shared.js
+include dash_bootstrap_daterangepicker/*-shared.js.map
+include dash_bootstrap_daterangepicker/metadata.json
+include dash_bootstrap_daterangepicker/package-info.json
+include README.md
+include LICENSE
+include package.json
