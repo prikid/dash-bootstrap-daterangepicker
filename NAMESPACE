@@ -1,4 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-export(''DashBootstrapDaterangepicker)
+export(DashBootstrapDaterangepicker)
+export(DashBootstrapDaterangepicker)
 export(DashBootstrapDaterangepickerExample)
+export(dashBootstrapDaterangepicker)

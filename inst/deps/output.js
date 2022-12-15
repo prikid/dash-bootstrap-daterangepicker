@@ -14,7 +14,7 @@ window["dash_bootstrap_daterangepicker"] =
 /******/ 	function hotDownloadUpdateChunk(chunkId) {
 /******/ 		var script = document.createElement("script");
 /******/ 		script.charset = "utf-8";
-/******/ 		script.src = __webpack_require__.p + "bf0bdce-" + chunkId + "-wps-hmr.js";
+/******/ 		script.src = __webpack_require__.p + "980ee75-" + chunkId + "-wps-hmr.js";
 /******/ 		if (null) script.crossOrigin = null;
 /******/ 		document.head.appendChild(script);
 /******/ 	}
@@ -28,7 +28,7 @@ window["dash_bootstrap_daterangepicker"] =
 /******/ 			}
 /******/ 			try {
 /******/ 				var request = new XMLHttpRequest();
-/******/ 				var requestPath = __webpack_require__.p + "bf0bdce-wps-hmr.json";
+/******/ 				var requestPath = __webpack_require__.p + "980ee75-wps-hmr.json";
 /******/ 				request.open("GET", requestPath, true);
 /******/ 				request.timeout = requestTimeout;
 /******/ 				request.send(null);
@@ -64,7 +64,7 @@ window["dash_bootstrap_daterangepicker"] =
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "640d8ff6b206330c02af";
+/******/ 	var hotCurrentHash = "71e1dd1e89acafe70c1c";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -836,7 +836,7 @@ window["dash_bootstrap_daterangepicker"] =
 /******/ 	        var srcFragments = src.split('/');
 /******/ 	        var fileFragments = srcFragments.slice(-1)[0].split('.');
 /******/
-/******/ 	        fileFragments.splice(1, 0, "v0_0_1m1628612513");
+/******/ 	        fileFragments.splice(1, 0, "v0_0_1m1643534618");
 /******/ 	        srcFragments.splice(-1, 1, fileFragments.join('.'))
 /******/
 /******/ 	        return srcFragments.join('/');
@@ -65029,7 +65029,7 @@ module.exports = function (css) {
   let hash = '<unknown>';
   let options;
   try {
-    options = {"compress":null,"historyFallback":false,"hmr":true,"host":null,"liveReload":false,"log":{"level":"info","prefix":{"template":"{{level}}"},"name":"webpack-plugin-serve"},"open":true,"port":55555,"progress":true,"secure":false,"static":["D:\\PycharmProjects\\dash-bootstrap-daterangepicker"],"status":true,"address":"[::]:55555","compilerName":null,"wpsId":"bf0bdce"};
+    options = {"compress":null,"historyFallback":false,"hmr":true,"host":"localhost","liveReload":false,"log":{"level":"info","prefix":{"template":"{{level}}"},"name":"webpack-plugin-serve"},"open":true,"port":9001,"progress":true,"secure":false,"static":["/Users/serhii/PycharmProjects/dash-bootstrap-daterangepicker"],"status":true,"address":"127.0.0.1:9001","compilerName":null,"wpsId":"980ee75"};
   } catch (e) {
     const { log } = __webpack_require__(/*! ./lib/client/log */ "./node_modules/webpack-plugin-serve/lib/client/log.js");
     log.error(
@@ -66260,6 +66260,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_daterangepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap-daterangepicker */ "./node_modules/react-bootstrap-daterangepicker/dist/index.es.js");
 /* harmony import */ var _daterangepicker_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./daterangepicker.css */ "./src/lib/components/daterangepicker.css");
 /* harmony import */ var _daterangepicker_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_daterangepicker_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66290,6 +66292,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 // you will also need the css that comes with bootstrap-daterangepicker
 
 
+
 /**
  * DashBootstrapDaterangepicker component based on react-bootstrap-daterangepicker
  */
@@ -66299,33 +66302,45 @@ var DashBootstrapDaterangepicker = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(DashBootstrapDaterangepicker);
 
-  function DashBootstrapDaterangepicker() {
+  function DashBootstrapDaterangepicker(props) {
+    var _this;
+
     _classCallCheck(this, DashBootstrapDaterangepicker);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props); // this.props.start_date = moment(this.props.initialSettings.startDate)
+    // this.props.end_date = moment(this.props.initialSettings.endDate)
+
+    _this.props.setProps({
+      start_date: moment__WEBPACK_IMPORTED_MODULE_4___default()(_this.props.initialSettings.startDate).format("M/D/YYYY"),
+      end_date: moment__WEBPACK_IMPORTED_MODULE_4___default()(_this.props.initialSettings.endDate).format("M/D/YYYY")
+    });
+
+    return _this;
   }
 
   _createClass(DashBootstrapDaterangepicker, [{
     key: "render",
     value: function render() {
-      console.log(this.props);
+      var _this2 = this;
+
       var _this$props = this.props,
           id = _this$props.id,
           initialSettings = _this$props.initialSettings,
           setProps = _this$props.setProps,
-          innerClassName = _this$props.innerClassName; // eslint-disable-next-line no-unused-vars
-      // const dates =  {start: initialSettings.startDate, end: initialSettings.endDate}
-      // setProps({dates: {start: initialSettings.startDate, end: initialSettings.endDate}})
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_daterangepicker__WEBPACK_IMPORTED_MODULE_2__["DateRangePicker"], {
+          className = _this$props.className,
+          innerClassName = _this$props.innerClassName;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: id,
+        className: className
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_daterangepicker__WEBPACK_IMPORTED_MODULE_2__["DateRangePicker"], {
         initialSettings: initialSettings,
         onCallback: function onCallback(start, end) {
-          // thrown when the start/end dates change
-          console.log('onCallback');
+          console.log(start);
+          console.log(_this2); // thrown when the start/end dates change
+
           setProps({
-            start_date: start,
-            end_date: end
+            start_date: start.format("M/D/YYYY"),
+            end_date: end.format("M/D/YYYY")
           });
         } // onShow={} callback(event, picker) //thrown when the widget is shown
         // onHide: callback(event, picker) thrown when the widget is hidden
@@ -66338,7 +66353,7 @@ var DashBootstrapDaterangepicker = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: innerClassName
-      }));
+      })));
     }
   }]);
 
@@ -66368,12 +66383,17 @@ DashBootstrapDaterangepicker.propTypes = {
   /**
    * start_date
    */
-  start_date: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  start_date: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
 
   /**
    * end_date
    */
-  end_date: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  end_date: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+
+  /**
+   * Class of the input component.
+   */
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
 
   /**
    * Class of the input.

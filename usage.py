@@ -1,6 +1,6 @@
 import dash_bootstrap_daterangepicker
 import dash
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 import dash_html_components as html
 import dash_core_components as dcc
 from datetime import date, timedelta
@@ -53,10 +53,29 @@ app.layout = html.Div([
         min_date_allowed=date(1995, 8, 5),
         max_date_allowed=date(2017, 9, 19),
         initial_visible_month=date(2017, 8, 5),
+        start_date=date(2016, 8, 25),
         end_date=date(2017, 8, 25)
     ),
     html.Div(id='output-container-date-picker-range')
 ])
+
+
+@app.callback(
+    Output('date_picker', 'start_date'),
+    Output('date_picker', 'end_date'),
+    # Output('date_picker', 'initialSettings'),
+
+    Input('my-date-picker-range', 'start_date'),
+    Input('my-date-picker-range', 'end_date'),
+
+    State('date_picker', 'initialSettings'),
+    prevent_initall_call=True
+)
+def on_dates_change(start_date, end_date, settings):
+    # settings['startDate'] = parse(start_date).strftime("%m/%d/%Y")
+    # settings['endDate'] = parse(end_date).strftime("%m/%d/%Y")
+    # return settings
+    return parse(start_date).strftime("%m/%d/%Y"), parse(end_date).strftime("%m/%d/%Y")
 
 
 @app.callback(

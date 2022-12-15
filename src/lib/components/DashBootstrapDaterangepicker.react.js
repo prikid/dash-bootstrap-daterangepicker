@@ -16,8 +16,7 @@ export default class DashBootstrapDaterangepicker extends Component {
     constructor(props) {
         super(props);
 
-        // this.props.start_date = moment(this.props.initialSettings.startDate)
-        // this.props.end_date = moment(this.props.initialSettings.endDate)
+        this.ref = React.createRef();
 
         this.props.setProps(
             {
@@ -28,15 +27,21 @@ export default class DashBootstrapDaterangepicker extends Component {
     }
 
     render() {
-        const {id, initialSettings, setProps, className, innerClassName} = this.props;
+        const {id, initialSettings, setProps, className, innerClassName, start_date, end_date} = this.props;
+
+        if  (this.ref.current) {
+            this.ref.current.setStartDate(start_date)
+            this.ref.current.setEndDate(end_date)
+        }
 
         return (
             <div id={id} className={className}>
                 <DateRangePicker
+                    ref={this.ref}
                     initialSettings={initialSettings}
                     onCallback={(start, end) => {
-                        console.log(start)
-                        console.log(this)
+                        // console.log(start)
+                        // console.log(this)
                         // thrown when the start/end dates change
                         setProps({start_date: start.format("M/D/YYYY"), end_date: end.format("M/D/YYYY")})
                     }}
