@@ -1,8 +1,8 @@
+from dash import html, dcc
+
 import dash_bootstrap_daterangepicker
 import dash
 from dash.dependencies import Input, Output, State
-import dash_html_components as html
-import dash_core_components as dcc
 from datetime import date, timedelta
 from dateutil.parser import parse
 

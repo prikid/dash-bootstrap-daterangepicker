@@ -7,6 +7,7 @@ import {DateRangePicker} from 'react-bootstrap-daterangepicker';
 // you will also need the css that comes with bootstrap-daterangepicker
 import './daterangepicker.css';
 import moment from 'moment'
+import log from "eslint-plugin-react/lib/util/log";
 
 
 /**
@@ -20,16 +21,24 @@ export default class DashBootstrapDaterangepicker extends Component {
 
         this.props.setProps(
             {
-                start_date: moment(this.props.initialSettings.startDate).format("M/D/YYYY"),
-                end_date: moment(this.props.initialSettings.endDate).format("M/D/YYYY")
+                start_date: moment(this.props.initialSettings.startDate, "M/D/YYYY").format("M/D/YYYY"),
+                end_date: moment(this.props.initialSettings.endDate, "M/D/YYYY").format("M/D/YYYY")
             }
         )
+    }
+
+    handleCallback = (start, end) => {
+        const {setProps} = this.props;
+        setProps({
+            start_date: start.format("M/D/YYYY"),
+            end_date: end.format("M/D/YYYY")
+        });
     }
 
     render() {
         const {id, initialSettings, setProps, className, innerClassName, start_date, end_date} = this.props;
 
-        if  (this.ref.current) {
+        if (this.ref.current) {
             this.ref.current.setStartDate(start_date)
             this.ref.current.setEndDate(end_date)
         }
@@ -39,12 +48,7 @@ export default class DashBootstrapDaterangepicker extends Component {
                 <DateRangePicker
                     ref={this.ref}
                     initialSettings={initialSettings}
-                    onCallback={(start, end) => {
-                        // console.log(start)
-                        // console.log(this)
-                        // thrown when the start/end dates change
-                        setProps({start_date: start.format("M/D/YYYY"), end_date: end.format("M/D/YYYY")})
-                    }}
+                    onCallback={this.handleCallback}
 
                     // onShow={} callback(event, picker) //thrown when the widget is shown
                     // onHide: callback(event, picker) thrown when the widget is hidden

@@ -277,3 +277,4 @@ GitHub.sublime-settings
 
 # Project exclude paths
 /dash_bootstrap_daterangepicker/
+/.idea/
