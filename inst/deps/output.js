@@ -47274,8 +47274,8 @@ var ReactStrictModeWarnings = {
       return;
     }
 
-    if (typeof instance.componentWillMount === 'function' && // Don't warn about react-lifecycles-compat polyfilled components.
-    instance.componentWillMount.__suppressDeprecationWarning !== true) {
+    if (typeof instance.UNSAFE_componentWillMount === 'function' && // Don't warn about react-lifecycles-compat polyfilled components.
+    instance.UNSAFE_componentWillMount.__suppressDeprecationWarning !== true) {
       pendingComponentWillMountWarnings.push(fiber);
     }
 
@@ -47283,7 +47283,7 @@ var ReactStrictModeWarnings = {
       pendingUNSAFE_ComponentWillMountWarnings.push(fiber);
     }
 
-    if (typeof instance.componentWillReceiveProps === 'function' && instance.componentWillReceiveProps.__suppressDeprecationWarning !== true) {
+    if (typeof instance.UNSAFE_componentWillReceiveProps === 'function' && instance.UNSAFE_componentWillReceiveProps.__suppressDeprecationWarning !== true) {
       pendingComponentWillReceivePropsWarnings.push(fiber);
     }
 
@@ -47291,7 +47291,7 @@ var ReactStrictModeWarnings = {
       pendingUNSAFE_ComponentWillReceivePropsWarnings.push(fiber);
     }
 
-    if (typeof instance.componentWillUpdate === 'function' && instance.componentWillUpdate.__suppressDeprecationWarning !== true) {
+    if (typeof instance.UNSAFE_componentWillUpdate === 'function' && instance.UNSAFE_componentWillUpdate.__suppressDeprecationWarning !== true) {
       pendingComponentWillUpdateWarnings.push(fiber);
     }
 
@@ -48917,19 +48917,19 @@ function constructClassInstance(workInProgress, ctor, props) {
       var foundWillReceivePropsName = null;
       var foundWillUpdateName = null;
 
-      if (typeof instance.componentWillMount === 'function' && instance.componentWillMount.__suppressDeprecationWarning !== true) {
+      if (typeof instance.UNSAFE_componentWillMount === 'function' && instance.UNSAFE_componentWillMount.__suppressDeprecationWarning !== true) {
         foundWillMountName = 'componentWillMount';
       } else if (typeof instance.UNSAFE_componentWillMount === 'function') {
         foundWillMountName = 'UNSAFE_componentWillMount';
       }
 
-      if (typeof instance.componentWillReceiveProps === 'function' && instance.componentWillReceiveProps.__suppressDeprecationWarning !== true) {
+      if (typeof instance.UNSAFE_componentWillReceiveProps === 'function' && instance.UNSAFE_componentWillReceiveProps.__suppressDeprecationWarning !== true) {
         foundWillReceivePropsName = 'componentWillReceiveProps';
       } else if (typeof instance.UNSAFE_componentWillReceiveProps === 'function') {
         foundWillReceivePropsName = 'UNSAFE_componentWillReceiveProps';
       }
 
-      if (typeof instance.componentWillUpdate === 'function' && instance.componentWillUpdate.__suppressDeprecationWarning !== true) {
+      if (typeof instance.UNSAFE_componentWillUpdate === 'function' && instance.UNSAFE_componentWillUpdate.__suppressDeprecationWarning !== true) {
         foundWillUpdateName = 'componentWillUpdate';
       } else if (typeof instance.UNSAFE_componentWillUpdate === 'function') {
         foundWillUpdateName = 'UNSAFE_componentWillUpdate';
@@ -48962,8 +48962,8 @@ function callComponentWillMount(workInProgress, instance) {
   startPhaseTimer(workInProgress, 'componentWillMount');
   var oldState = instance.state;
 
-  if (typeof instance.componentWillMount === 'function') {
-    instance.componentWillMount();
+  if (typeof instance.UNSAFE_componentWillMount === 'function') {
+    instance.UNSAFE_componentWillMount();
   }
 
   if (typeof instance.UNSAFE_componentWillMount === 'function') {
@@ -48985,8 +48985,8 @@ function callComponentWillReceiveProps(workInProgress, instance, newProps, nextC
   var oldState = instance.state;
   startPhaseTimer(workInProgress, 'componentWillReceiveProps');
 
-  if (typeof instance.componentWillReceiveProps === 'function') {
-    instance.componentWillReceiveProps(newProps, nextContext);
+  if (typeof instance.UNSAFE_componentWillReceiveProps === 'function') {
+    instance.UNSAFE_componentWillReceiveProps(newProps, nextContext);
   }
 
   if (typeof instance.UNSAFE_componentWillReceiveProps === 'function') {
@@ -49061,7 +49061,7 @@ function mountClassInstance(workInProgress, ctor, newProps, renderExpirationTime
   // Unsafe lifecycles should not be invoked for components using the new APIs.
 
 
-  if (typeof ctor.getDerivedStateFromProps !== 'function' && typeof instance.getSnapshotBeforeUpdate !== 'function' && (typeof instance.UNSAFE_componentWillMount === 'function' || typeof instance.componentWillMount === 'function')) {
+  if (typeof ctor.getDerivedStateFromProps !== 'function' && typeof instance.getSnapshotBeforeUpdate !== 'function' && (typeof instance.UNSAFE_componentWillMount === 'function' || typeof instance.UNSAFE_componentWillMount === 'function')) {
     callComponentWillMount(workInProgress, instance); // If we had additional state updates during this life-cycle, let's
     // process them now.
 
@@ -49096,7 +49096,7 @@ function resumeMountClassInstance(workInProgress, ctor, newProps, renderExpirati
   // In order to support react-lifecycles-compat polyfilled components,
   // Unsafe lifecycles should not be invoked for components using the new APIs.
 
-  if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillReceiveProps === 'function' || typeof instance.componentWillReceiveProps === 'function')) {
+  if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillReceiveProps === 'function' || typeof instance.UNSAFE_componentWillReceiveProps === 'function')) {
     if (oldProps !== newProps || oldContext !== nextContext) {
       callComponentWillReceiveProps(workInProgress, instance, newProps, nextContext);
     }
@@ -49128,11 +49128,11 @@ function resumeMountClassInstance(workInProgress, ctor, newProps, renderExpirati
   if (shouldUpdate) {
     // In order to support react-lifecycles-compat polyfilled components,
     // Unsafe lifecycles should not be invoked for components using the new APIs.
-    if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillMount === 'function' || typeof instance.componentWillMount === 'function')) {
+    if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillMount === 'function' || typeof instance.UNSAFE_componentWillMount === 'function')) {
       startPhaseTimer(workInProgress, 'componentWillMount');
 
-      if (typeof instance.componentWillMount === 'function') {
-        instance.componentWillMount();
+      if (typeof instance.UNSAFE_componentWillMount === 'function') {
+        instance.UNSAFE_componentWillMount();
       }
 
       if (typeof instance.UNSAFE_componentWillMount === 'function') {
@@ -49190,7 +49190,7 @@ function updateClassInstance(current, workInProgress, ctor, newProps, renderExpi
   // In order to support react-lifecycles-compat polyfilled components,
   // Unsafe lifecycles should not be invoked for components using the new APIs.
 
-  if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillReceiveProps === 'function' || typeof instance.componentWillReceiveProps === 'function')) {
+  if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillReceiveProps === 'function' || typeof instance.UNSAFE_componentWillReceiveProps === 'function')) {
     if (oldProps !== newProps || oldContext !== nextContext) {
       callComponentWillReceiveProps(workInProgress, instance, newProps, nextContext);
     }
@@ -49230,11 +49230,11 @@ function updateClassInstance(current, workInProgress, ctor, newProps, renderExpi
   if (shouldUpdate) {
     // In order to support react-lifecycles-compat polyfilled components,
     // Unsafe lifecycles should not be invoked for components using the new APIs.
-    if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillUpdate === 'function' || typeof instance.componentWillUpdate === 'function')) {
+    if (!hasNewLifecycles && (typeof instance.UNSAFE_componentWillUpdate === 'function' || typeof instance.UNSAFE_componentWillUpdate === 'function')) {
       startPhaseTimer(workInProgress, 'componentWillUpdate');
 
-      if (typeof instance.componentWillUpdate === 'function') {
-        instance.componentWillUpdate(newProps, newState, nextContext);
+      if (typeof instance.UNSAFE_componentWillUpdate === 'function') {
+        instance.UNSAFE_componentWillUpdate(newProps, newState, nextContext);
       }
 
       if (typeof instance.UNSAFE_componentWillUpdate === 'function') {
